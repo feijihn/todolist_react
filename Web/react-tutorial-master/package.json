@@ -1,0 +1,64 @@
+{
+  "name": "react-tutorial",
+  "version": "0.0.0",
+  "description": "Code from the React tutorial.",
+  "main": "server.js",
+  "dependencies": {
+    "ajax": "0.0.4",
+    "babel": "^6.3.26",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "body-parser": "^1.4.3",
+    "bytes": "^2.2.0",
+    "connection": "0.0.0",
+    "content-type": "^1.0.1",
+    "debug": "^2.2.0",
+    "depd": "^1.1.0",
+    "express": "^4.4.5",
+    "gridfs": "^1.0.0",
+    "http-errors": "^1.3.1",
+    "iconv-lite": "^0.4.13",
+    "jquery": "^2.2.0",
+    "kerberos": "0.0.18",
+    "lodash": "^4.0.0",
+    "material-ui": "^0.14.2",
+    "mime-db": "^1.21.0",
+    "mongodb": "^2.1.4",
+    "mongoose": "^4.3.6",
+    "node-mysql": "^0.4.2",
+    "on-finished": "^2.3.0",
+    "qs": "^6.0.2",
+    "raw-body": "^2.1.5",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-tap-event-plugin": "^0.2.1",
+    "unpipe": "^1.0.0",
+    "webpack": "^1.12.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/react-tutorial.git"
+  },
+  "keywords": [
+    "react",
+    "tutorial",
+    "comment",
+    "example"
+  ],
+  "author": "petehunt",
+  "bugs": {
+    "url": "https://github.com/reactjs/react-tutorial/issues"
+  },
+  "homepage": "https://github.com/reactjs/react-tutorial",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "license": "ISC"
+}
