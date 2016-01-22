@@ -1,0 +1,51 @@
+* {
+    padding:0;
+    margin:0;
+    font-family: 'Roboto', sans-serif;
+}
+
+html{
+    color:#626771;
+}
+
+body{
+    padding-top: 10vh;
+    text-align: center;
+}
+
+#statusBar {
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.taskBox {
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.taskList {
+    width: 100%;
+    background-color: #b2ebf2;
+    
+}
+
+.addNewTask {
+    width: 100%;
+    background-color: #00bcd4;
+    padding: 3.5%;
+}
+
+.taskElement {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 2%;
+}
+
+.paperE {
+    width: 100%;
+    text-align: center;
+}
+
+.titleBar {
+    padding: 3.5%;
+    background-color: #00bcd4;
+}
