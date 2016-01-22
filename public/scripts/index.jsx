@@ -15,10 +15,10 @@ var TaskBox = React.createClass({
 		return {data: []};
 	},
 	loadTasksFromServer: function() {
-	    $.ajax({
-      	url: this.props.url,
+			$.ajax({
+				url: this.props.url,
 				dataType: 'json',
-			  cache: false,
+				cache: false,
 				success: function(data) {
 					this.setState({data: data});
 				}.bind(this),
@@ -29,38 +29,37 @@ var TaskBox = React.createClass({
   },
 	componentDidMount: function() { //update data with this.props.updateInterval interval
 		this.loadTasksFromServer();
-    setInterval(this.loadTasksFromServer, this.props.updateInterval);
-			},
-	handeDelete: function(key){
-			$.ajax({
-      	url: this.props.url,
-				type: 'POST',
-				data: {"id" : 1453402706170},
-				dataType: 'json',
-			  cache: false,
-				success: function() {
-				},
-				error: function(xhr, status, err) {
-					console.error(this.props.url, status, err.toString());
-				}
-			});		
 	},
-	handleAdd: function(){
-		$.ajax({
+	handleDelete: function(key){
+		/*$.ajax({
       url: this.props.url,
       dataType: 'json',
-      type: 'POST',
-      data: {"id" : Date.now(), "priority": 1, "text": "newtask"},
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
+      data: {"id" : 11453464243666},
+      type: 'DELETE',
+      success: function (data) {
+      }.bind(this), 
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
-    });
+      });	*/
+			/*this.loadTasksFromServer();*/
+			console.log('handleDelete called!')
+		},
+	handleAdd: function(){
+		$.ajax({																																	
+			url: this.props.url,
+			dataType: 'json',
+			type: 'POST',
+			data: {"id" : Date.now(), "priority": 1, "text": "newtask"},
+			success: function(data) {
+				this.setState({data: data});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
 		this.loadTasksFromServer();
 	},
-
 	render: function() { //after server implemented, "this.props.data" should be replaced with "this.state.data"
 		return (
 			<Paper className="paperE" zDepth={5}>
@@ -84,14 +83,16 @@ var TaskList = React.createClass({
 		this.setState({
 			data: this.props.data
 		}) ;	
-		{this.props.onDelete}	
+	},
+	passDelete: function(){
+		this.props.onDelete
 	},
 	render: function() {
   	  var taskNodes = this.props.data.map(function(task) {
     	  return (
-        	<TaskElement key={task.id} priority={task.priority} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete}/>
+        	<TaskElement key={task.id} priority={task.priority} text={task.text} onEdit={this.props.onEdit} onDelete={this.passDelete}/>
       	  );
-				}.bind(this));
+				}, this);
 		return (
 			<div className="taskList">
 				{taskNodes}
@@ -115,15 +116,15 @@ var TaskElement = React.createClass({
 			priority: this.props.priority
 		});
 	},
-    render: function() {
-        return (
-            <div className="taskElement">
-            	<i className="material-icons" onClick={this.props.onEdit}>mode_edit</i>
-            	<i className="material-icons" onClick={this.props.onDelete}>delete</i>
-            	<p>{this.props.priority}.{this.state.text}</p>
-            </div>
-        );
-    }
+  render: function() {
+    return (
+      <div className="taskElement">
+       	<i className="material-icons" onClick={this.props.onEdit}>mode_edit</i>
+       	<i className="material-icons" onClick={this.props.onDelete}>delete</i>
+       	<p>{this.props.priority}.{this.state.text}</p>
+      </div>
+		   );
+	}
 });
 
 var AddNewTask = React.createClass({

@@ -111,20 +111,21 @@
 		componentDidMount: function componentDidMount() {
 			//update data with this.props.updateInterval interval
 			this.loadTasksFromServer();
-			setInterval(this.loadTasksFromServer, this.props.updateInterval);
 		},
-		handeDelete: function handeDelete(key) {
-			_jquery2.default.ajax({
-				url: this.props.url,
-				type: 'POST',
-				data: { "id": 1453402706170 },
-				dataType: 'json',
-				cache: false,
-				success: function success() {},
-				error: function error(xhr, status, err) {
-					console.error(this.props.url, status, err.toString());
-				}
-			});
+		handleDelete: function handleDelete(key) {
+			/*$.ajax({
+	      url: this.props.url,
+	      dataType: 'json',
+	      data: {"id" : 11453464243666},
+	      type: 'DELETE',
+	      success: function (data) {
+	      }.bind(this), 
+	      error: function(xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	      });	*/
+			/*this.loadTasksFromServer();*/
+			console.log('handleDelete called!');
 		},
 		handleAdd: function handleAdd() {
 			_jquery2.default.ajax({
@@ -141,7 +142,6 @@
 			});
 			this.loadTasksFromServer();
 		},
-
 		render: function render() {
 			//after server implemented, "this.props.data" should be replaced with "this.state.data"
 			return _react2.default.createElement(
@@ -168,14 +168,14 @@
 			this.setState({
 				data: this.props.data
 			});
-			{
-				this.props.onDelete;
-			}
+		},
+		passDelete: function passDelete() {
+			this.props.onDelete;
 		},
 		render: function render() {
 			var taskNodes = this.props.data.map(function (task) {
-				return _react2.default.createElement(TaskElement, { key: task.id, priority: task.priority, text: task.text, onEdit: this.props.onEdit, onDelete: this.props.onDelete });
-			}.bind(this));
+				return _react2.default.createElement(TaskElement, { key: task.id, priority: task.priority, text: task.text, onEdit: this.props.onEdit, onDelete: this.passDelete });
+			}, this);
 			return _react2.default.createElement(
 				'div',
 				{ className: 'taskList' },
