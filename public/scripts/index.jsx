@@ -202,7 +202,7 @@ var TaskElement = React.createClass({
 	            		<i className="material-icons" onClick={this.Delete}>delete</i>
 	            		<i className="material-icons">keyboard_arrow_down</i>
 	            		<i className="material-icons">keyboard_arrow_up</i>
-								</div> .
+								</div> 
 				</div>
 		   );
 		}else{

@@ -38,6 +38,7 @@ body{
     padding: 2%;
     width: 100%;
     display: inline-block;
+		vertical-align: top;
 }
 
 .paperE {

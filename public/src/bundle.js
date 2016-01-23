@@ -248,7 +248,7 @@
 		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
-									), " ."
+									)
 					)
 			   );
 			}else{
