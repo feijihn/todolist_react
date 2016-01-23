@@ -75,6 +75,7 @@
 	  display: 'inline-block',
 	  opacity: 1,
 	};
+
 	var appBarsStyle = {
 		backgroundColor: Colors.blueGrey600,
 	};
@@ -149,7 +150,8 @@
 				React.createElement(Paper, {className: "paperE", zDepth: 5}, 
 				  	React.createElement(AppBar, {
 						showMenuIconButton: false, 
-				 		title: "Just To-Do. No shit"}
+				 		title: "Just To-Do. No shit", 
+				 		style: appBarsStyle}
 				 		), 
 					React.createElement(TaskList, {data: this.state.data, onDelete: this.handleDelete, onEdit: this.handleEdit}), 
 					React.createElement(AddNewTask, {onAdd: this.handleAdd})
@@ -278,7 +280,7 @@
 	    render: function() {
 	    	var currentButtonStyle = this.state.currentButtonStyle;
 	        return (
-	            React.createElement("div", {className: "addNewTask"}, 
+	            React.createElement("div", {className: "addNewTask", style: appBarsStyle}, 
 	           		React.createElement(Paper, {style: currentButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, 
 	           		onClick: this.props.onAdd, 
 	           		onMouseEnter: this.handleMouseEnter, 

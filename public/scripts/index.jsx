@@ -29,6 +29,7 @@ var circleButtonStyleHover = {
   display: 'inline-block',
   opacity: 1,
 };
+
 var appBarsStyle = {
 	backgroundColor: Colors.blueGrey600,
 };
@@ -104,6 +105,7 @@ var TaskBox = React.createClass({
 			  	<AppBar 
 					showMenuIconButton={false}
 			 		title="Just To-Do. No shit"
+			 		style={appBarsStyle}
 			 		/>
 				<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit}/>
 				<AddNewTask onAdd={this.handleAdd}/>
@@ -232,7 +234,7 @@ var AddNewTask = React.createClass({
     render: function() {
     	var currentButtonStyle = this.state.currentButtonStyle;
         return (
-            <div className="addNewTask">
+            <div className="addNewTask" style={appBarsStyle}>
            		<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
            		onClick={this.props.onAdd}
            		onMouseEnter={this.handleMouseEnter}
