@@ -11,6 +11,10 @@ var Toolbar = require('material-ui/lib/toolbar/toolbar');
 var ToolbarTitle = require('material-ui/lib/toolbar/toolbar-title');
 var TextField = require('material-ui/lib/text-field');
 var FlatButton = require('material-ui/lib/flat-button');
+var IconButton = require('material-ui/lib/icon-button');
+var MenuItem = require('material-ui/lib/menus/menu-item');
+var Divider = require('material-ui/lib/divider');
+var IconMenu = require('material-ui/lib/menus/icon-menu');
 
 var circleButtonStyle = {
 	height: 50,
@@ -187,7 +191,6 @@ var TaskElement = React.createClass({
 						backgroundColor: Colors.deepPurple100
 					}			
 				})
-
 		};
 	},
 	deleteTask: function() {
@@ -212,8 +215,15 @@ var TaskElement = React.createClass({
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}>
-				<div className="textArea">
-				<p>{this.state.text}</p>
+					<div className="textArea">
+						<h4>{this.state.text}</h4>
+					</div>
+	            	<div className="iconsArea">
+	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
+	            		<i className="material-icons" onClick={this.Delete}>delete</i>
+	            		<i className="material-icons">keyboard_arrow_down</i>
+	            		<i className="material-icons">keyboard_arrow_up</i>
+					</div> 
 				</div>
 				<div className="iconsArea">
 				<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
@@ -223,18 +233,19 @@ var TaskElement = React.createClass({
 				</div> 
 				</div>		   );
 		}else{ /*think about adding fullWidth={true} property*/
-		return (
-			<div className="taskElement">
-			<TextField onEnterKeyDown={this.Edit}
-			defaultValue={this.state.text}
-			underlineStyle={{borderColor:Colors.blueGrey300}}
-			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
-			multiLine={true}
-			errorText="Press Enter to submit your task"
-			errorStyle={{color:Colors.blueGrey300}}
-			/>
-			</div>
-		);
+			return (
+				<div className="taskElement">
+				<div className="checkBoxIcon"></div>
+			   <TextField onEnterKeyDown={this.Edit}
+			   defaultValue={this.state.text}
+			   underlineStyle={{borderColor:Colors.blueGrey300}}
+			   underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
+			   multiLine={true}
+			   errorText="Press Enter to submit your task"
+			   errorStyle={{color:Colors.blueGrey300}}
+			   />
+			  </div>
+			);
 		}
 	}
 });
@@ -253,21 +264,6 @@ var AddNewTask = React.createClass({
 			currentButtonStyle:circleButtonStyle
 		});
 	},
-<<<<<<< HEAD
-	render: function() {
-		var currentButtonStyle = this.state.currentButtonStyle;
-		return (
-			<div className="addNewTask">
-			<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
-			onClick={this.props.onAdd}
-			onMouseEnter={this.handleMouseEnter}
-			onMouseLeave={this.handleMouseLeave}>
-			<i className="material-icons" >add</i>
-			</Paper>
-			</div>
-		);
-	}
-=======
     render: function() {
     	var currentButtonStyle = this.state.currentButtonStyle;
         return (
@@ -281,7 +277,6 @@ var AddNewTask = React.createClass({
             </div>
         );
     }
->>>>>>> c15cb0445c9d5e30004fc7a05a1509b0ea664b05
 });
 
 ReactDOM.render(
