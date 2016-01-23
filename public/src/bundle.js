@@ -75,6 +75,7 @@
 		display: 'inline-block',
 		opacity: 1,
 	};
+
 	var appBarsStyle = {
 		backgroundColor: Colors.blueGrey600,
 	};
@@ -161,12 +162,22 @@
 		render: function() { 
 			return (
 				React.createElement(Paper, {className: "paperE", zDepth: 5}, 
+<<<<<<< HEAD
 				React.createElement(AppBar, {
 				showMenuIconButton: false, 
 				title: "Just To-Do. No shit"}
 				), 
 				React.createElement(TaskList, {data: this.state.data, onDelete: this.handleDelete, onEdit: this.handleEdit, onMove: this.handleMove}), 
 				React.createElement(AddNewTask, {onAdd: this.handleAdd})
+=======
+				  	React.createElement(AppBar, {
+						showMenuIconButton: false, 
+				 		title: "Just To-Do. No shit", 
+				 		style: appBarsStyle}
+				 		), 
+					React.createElement(TaskList, {data: this.state.data, onDelete: this.handleDelete, onEdit: this.handleEdit}), 
+					React.createElement(AddNewTask, {onAdd: this.handleAdd})
+>>>>>>> c15cb0445c9d5e30004fc7a05a1509b0ea664b05
 				)
 			);
 		}
@@ -257,6 +268,7 @@
 			if(!this.state.editing){
 				return (
 					React.createElement("div", {className: "taskElement", style: this.state.style}, 
+<<<<<<< HEAD
 					React.createElement("div", {className: "textArea"}, 
 					React.createElement("p", null, this.state.text)
 					), 
@@ -273,6 +285,31 @@
 					React.createElement("div", {className: "taskElement"}, 
 					React.createElement(TextField, {onEnterKeyDown: this.editTask})
 					)
+=======
+									React.createElement("div", {className: "textArea"}, 
+									React.createElement("h4", null, this.state.text)
+									), 
+		            	React.createElement("div", {className: "iconsArea"}, 
+		            		React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
+		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
+		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
+		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
+						)
+					)
+			   );
+			}else{ /*think about adding fullWidth={true} property*/
+				return (
+					React.createElement("div", {className: "taskElement"}, 
+				   React.createElement(TextField, {onEnterKeyDown: this.Edit, 
+				   defaultValue: this.state.text, 
+				   underlineStyle: {borderColor:Colors.blueGrey300}, 
+				   underlineFocusStyle: {borderColor:Colors.blueGrey600}, 
+				   multiLine: true, 
+				   errorText: "Press Enter to submit your task", 
+				   errorStyle: {color:Colors.blueGrey300}}
+				   )
+				  )
+>>>>>>> c15cb0445c9d5e30004fc7a05a1509b0ea664b05
 				);
 			}
 		}
@@ -292,6 +329,7 @@
 				currentButtonStyle:circleButtonStyle
 			});
 		},
+<<<<<<< HEAD
 		render: function() {
 			var currentButtonStyle = this.state.currentButtonStyle;
 			return (
@@ -305,6 +343,21 @@
 				)
 			);
 		}
+=======
+	    render: function() {
+	    	var currentButtonStyle = this.state.currentButtonStyle;
+	        return (
+	            React.createElement("div", {className: "addNewTask", style: appBarsStyle}, 
+	           		React.createElement(Paper, {style: currentButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, 
+	           		onClick: this.props.onAdd, 
+	           		onMouseEnter: this.handleMouseEnter, 
+	           		onMouseLeave: this.handleMouseLeave}, 
+	            	React.createElement("i", {className: "material-icons"}, "add")
+	            	)
+	            )
+	        );
+	    }
+>>>>>>> c15cb0445c9d5e30004fc7a05a1509b0ea664b05
 	});
 
 	ReactDOM.render(

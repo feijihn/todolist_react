@@ -4,10 +4,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-html{
-    color:#626771;
-}
-
 body{
     padding-top: 10vh;
     text-align: center;
@@ -29,7 +25,6 @@ body{
 
 .addNewTask {
     width: 100%;
-    background-color: #00bcd4;
     padding: 3.5%;
 }
 
@@ -38,17 +33,13 @@ body{
     padding: 2%;
     width: 100%;
     display: inline-block;
-		vertical-align: top;
+	vertical-align: top;
+    word-break: break-all; /*a little crutch here. should be discussed later. made it to force word wrapping*/
 }
 
 .paperE {
     width: 100%;
     text-align: center;
-}
-
-.titleBar {
-    padding: 3.5%;
-    background-color: #00bcd4;
 }
 
 .circleButtonStyle, i {
@@ -60,14 +51,10 @@ body{
 }
 
 .iconsArea {
-    height: 100%;
-    width: auto;
     float:right;
     opacity: 0.5;
 }
 
 .textArea {
-    width: auto;
-    height: 100%;
     float:left;
 }

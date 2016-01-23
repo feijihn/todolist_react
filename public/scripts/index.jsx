@@ -29,6 +29,7 @@ var circleButtonStyleHover = {
 	display: 'inline-block',
 	opacity: 1,
 };
+
 var appBarsStyle = {
 	backgroundColor: Colors.blueGrey600,
 };
@@ -220,14 +221,20 @@ var TaskElement = React.createClass({
 				<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
 				<i className="material-icons" onClick={this.moveTask.bind(this, 1)}>keyboard_arrow_up</i>
 				</div> 
-				</div>
-			);
-		}else{
-			return (
-				<div className="taskElement">
-				<TextField onEnterKeyDown={this.editTask} />
-				</div>
-			);
+				</div>		   );
+		}else{ /*think about adding fullWidth={true} property*/
+		return (
+			<div className="taskElement">
+			<TextField onEnterKeyDown={this.Edit}
+			defaultValue={this.state.text}
+			underlineStyle={{borderColor:Colors.blueGrey300}}
+			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
+			multiLine={true}
+			errorText="Press Enter to submit your task"
+			errorStyle={{color:Colors.blueGrey300}}
+			/>
+			</div>
+		);
 		}
 	}
 });
@@ -246,6 +253,7 @@ var AddNewTask = React.createClass({
 			currentButtonStyle:circleButtonStyle
 		});
 	},
+<<<<<<< HEAD
 	render: function() {
 		var currentButtonStyle = this.state.currentButtonStyle;
 		return (
@@ -259,6 +267,21 @@ var AddNewTask = React.createClass({
 			</div>
 		);
 	}
+=======
+    render: function() {
+    	var currentButtonStyle = this.state.currentButtonStyle;
+        return (
+            <div className="addNewTask" style={appBarsStyle}>
+           		<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
+           		onClick={this.props.onAdd}
+           		onMouseEnter={this.handleMouseEnter}
+           		onMouseLeave={this.handleMouseLeave}>
+            	<i className="material-icons" >add</i>
+            	</Paper>
+            </div>
+        );
+    }
+>>>>>>> c15cb0445c9d5e30004fc7a05a1509b0ea664b05
 });
 
 ReactDOM.render(
