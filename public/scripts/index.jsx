@@ -215,16 +215,9 @@ var TaskElement = React.createClass({
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}>
-				<div className="textArea">
-				<h4>{this.state.text}</h4>
-				</div>
-				<div className="iconsArea">
-				<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
-				<i className="material-icons" onClick={this.Delete}>delete</i>
-				<i className="material-icons">keyboard_arrow_down</i>
-				<i className="material-icons">keyboard_arrow_up</i>
-				</div> 
-				</div>
+					<div className="textArea">
+						<h4>{this.state.text}</h4>
+					</div>
 				<div className="iconsArea">
 					<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 					<i className="material-icons" onClick={this.deleteTask}>delete</i>
@@ -244,6 +237,7 @@ var TaskElement = React.createClass({
 			multiLine={true}
 			errorText="Press Enter to submit your task"
 			errorStyle={{color:Colors.blueGrey300}}
+			onEnterKeyDown={this.editTask}
 			/>
 			</div>
 		);
