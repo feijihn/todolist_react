@@ -67,6 +67,15 @@
 	  opacity: 0.6,
 	};
 
+	var circleButtonStyleHover = {
+	  height: 50,
+	  width: 50,
+	  backgroundColor: Colors.cyan100,
+	  textAlign: 'center',
+	  display: 'inline-block',
+	  opacity: 1,
+	};
+
 	var statusStyleOne = {
 		backgroundColor: Colors.deepPurple100,
 	};
@@ -241,10 +250,27 @@
 	});
 
 	var AddNewTask = React.createClass({displayName: "AddNewTask",
+		getInitialState: function() {
+			return {currentButtonStyle:circleButtonStyle};
+		},
+		handleMouseEnter: function() {
+			this.setState({
+				currentButtonStyle:circleButtonStyleHover
+			});
+		},
+		handleMouseLeave: function() {
+			this.setState({
+				currentButtonStyle:circleButtonStyle
+			});
+		},
 	    render: function() {
+	    	var currentButtonStyle = this.state.currentButtonStyle;
 	        return (
 	            React.createElement("div", {className: "addNewTask"}, 
-	            React.createElement(Paper, {style: circleButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, onClick: this.props.onAdd}, 
+	           		React.createElement(Paper, {style: currentButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, 
+	           		onClick: this.props.onAdd, 
+	           		onMouseEnter: this.handleMouseEnter, 
+	           		onMouseLeave: this.handleMouseLeave}, 
 	            	React.createElement("i", {className: "material-icons"}, "add")
 	            	)
 	            )

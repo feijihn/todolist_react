@@ -1,20 +1,22 @@
 [
     {
-        "id": 1453571896458,
+        "id": 1453573081791,
         "priority": "1",
-        "text": "sample text"
+        "text": "dasdsadsa"
     },
     {
-        "id": 1453571897178,
+        "id": 1453573083157,
         "priority": "1",
-<<<<<<< HEAD
-        "text": "sdaadsadsa"
+        "text": "sadsadsa"
     },
     {
-        "id": 1453571391173,
+        "id": 1453573084049,
         "priority": "1",
-=======
->>>>>>> 3ac5ed7ab23d388ee71cffbf39de21fdc7145d21
+        "text": "Empty task."
+    },
+    {
+        "id": 1453573319633,
+        "priority": "1",
         "text": "Empty task."
     }
 ]

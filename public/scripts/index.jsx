@@ -21,6 +21,15 @@ var circleButtonStyle = {
   opacity: 0.6,
 };
 
+var circleButtonStyleHover = {
+  height: 50,
+  width: 50,
+  backgroundColor: Colors.cyan100,
+  textAlign: 'center',
+  display: 'inline-block',
+  opacity: 1,
+};
+
 var statusStyleOne = {
 	backgroundColor: Colors.deepPurple100,
 };
@@ -195,10 +204,27 @@ var TaskElement = React.createClass({
 });
 
 var AddNewTask = React.createClass({
+	getInitialState: function() {
+		return {currentButtonStyle:circleButtonStyle};
+	},
+	handleMouseEnter: function() {
+		this.setState({
+			currentButtonStyle:circleButtonStyleHover
+		});
+	},
+	handleMouseLeave: function() {
+		this.setState({
+			currentButtonStyle:circleButtonStyle
+		});
+	},
     render: function() {
+    	var currentButtonStyle = this.state.currentButtonStyle;
         return (
             <div className="addNewTask">
-            <Paper style={circleButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} onClick={this.props.onAdd}>
+           		<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
+           		onClick={this.props.onAdd}
+           		onMouseEnter={this.handleMouseEnter}
+           		onMouseLeave={this.handleMouseLeave}>
             	<i className="material-icons" >add</i>
             	</Paper>
             </div>
