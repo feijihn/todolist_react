@@ -49,3 +49,14 @@ body{
     padding: 3.5%;
     background-color: #00bcd4;
 }
+
+.circleButtonStyle, i {
+    cursor: pointer;
+}
+
+.circleButtonStyle {
+    padding-top: 13px;
+}
+.p {
+	font-size: 50%;
+}
