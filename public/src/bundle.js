@@ -272,7 +272,7 @@
 					{ className: 'taskElement' },
 					_react2.default.createElement(_textField2.default, { onEnterKeyDown: this.Edit }),
 					' ',
-					_react2.default.createElement(_flatButton2.default, { label: 'Done' })
+					_react2.default.createElement(_flatButton2.default, { label: 'Done', onClick: this.Edit })
 				);
 			}
 		}
