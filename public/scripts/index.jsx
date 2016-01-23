@@ -197,20 +197,27 @@ var TaskElement = React.createClass({
 			return (
 				<div className="taskElement" style={this.state.style}>
 								<div className="textArea">
-								<p>{this.state.text}</p>
+								<h4>{this.state.text}</h4>
 								</div>
 	            	<div className="iconsArea">
 	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 	            		<i className="material-icons" onClick={this.Delete}>delete</i>
 	            		<i className="material-icons">keyboard_arrow_down</i>
 	            		<i className="material-icons">keyboard_arrow_up</i>
-								</div> 
+					</div> 
 				</div>
 		   );
-		}else{
+		}else{ /*think about adding fullWidth={true} property*/
 			return (
 				<div className="taskElement">
-			   <TextField onEnterKeyDown={this.Edit} />
+			   <TextField onEnterKeyDown={this.Edit}
+			   defaultValue={this.state.text}
+			   underlineStyle={{borderColor:Colors.blueGrey300}}
+			   underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
+			   multiLine={true}
+			   errorText="Press Enter to submit your task"
+			   errorStyle={{color:Colors.blueGrey300}}
+			   />
 			  </div>
 			);
 		}

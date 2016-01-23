@@ -243,20 +243,27 @@
 				return (
 					React.createElement("div", {className: "taskElement", style: this.state.style}, 
 									React.createElement("div", {className: "textArea"}, 
-									React.createElement("p", null, this.state.text)
+									React.createElement("h4", null, this.state.text)
 									), 
 		            	React.createElement("div", {className: "iconsArea"}, 
 		            		React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
 		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
-									)
+						)
 					)
 			   );
-			}else{
+			}else{ /*think about adding fullWidth={true} property*/
 				return (
 					React.createElement("div", {className: "taskElement"}, 
-				   React.createElement(TextField, {onEnterKeyDown: this.Edit})
+				   React.createElement(TextField, {onEnterKeyDown: this.Edit, 
+				   defaultValue: this.state.text, 
+				   underlineStyle: {borderColor:Colors.blueGrey300}, 
+				   underlineFocusStyle: {borderColor:Colors.blueGrey600}, 
+				   multiLine: true, 
+				   errorText: "Press Enter to submit your task", 
+				   errorStyle: {color:Colors.blueGrey300}}
+				   )
 				  )
 				);
 			}
