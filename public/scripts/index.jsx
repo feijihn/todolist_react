@@ -166,7 +166,7 @@ var TaskElement = React.createClass({
 		}else{
 			return (
 				<div className="taskElement">
-			   <TextField onEnterKeyDown={this.Edit} /> <FlatButton label="Done" onClick={this.Edit}/>
+			   <TextField onEnterKeyDown={this.Edit} />
 			  </div>
 			);
 		}
