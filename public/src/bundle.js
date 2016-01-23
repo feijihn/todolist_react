@@ -240,13 +240,15 @@
 			if(!this.state.editing){
 				return (
 					React.createElement("div", {className: "taskElement", style: this.state.style}, 
-		            	React.createElement("div", {className: "textArea"}, React.createElement("h3", null, this.state.text)), 
+									React.createElement("div", {className: "textArea"}, 
+									React.createElement("p", null, this.state.text)
+									), 
 		            	React.createElement("div", {className: "iconsArea"}, 
 		            		React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
 		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
 		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
-		            	)
+									), " ."
 					)
 			   );
 			}else{

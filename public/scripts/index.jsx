@@ -194,13 +194,15 @@ var TaskElement = React.createClass({
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}>
-	            	<div className="textArea"><h3>{this.state.text}</h3></div>
+								<div className="textArea">
+								<p>{this.state.text}</p>
+								</div>
 	            	<div className="iconsArea">
 	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 	            		<i className="material-icons" onClick={this.Delete}>delete</i>
 	            		<i className="material-icons">keyboard_arrow_down</i>
 	            		<i className="material-icons">keyboard_arrow_up</i>
-	            	</div>
+								</div> .
 				</div>
 		   );
 		}else{
