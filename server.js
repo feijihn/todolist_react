@@ -16,7 +16,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var DB_FILE = path.join(__dirname, 'tasks.json');
+var DB_FILE = path.join(__dirname, '/data/tasks.json');
 	
 
 app.set('port', (process.env.PORT || 3000));
