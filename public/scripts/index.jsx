@@ -21,6 +21,22 @@ var circleButtonStyle = {
   opacity: 0.6,
 };
 
+var statusStyleOne = {
+	backgroundColor: Colors.deepPurple100,
+};
+
+var statusStyleOne = {
+	backgroundColor: Colors.brown100,
+};
+
+var statusStyleOne = {
+	backgroundColor: Colors.indigo100,
+};
+
+var appBarsStyle = {
+	backgroundColor: Colors.blueGrey600,
+};
+
 var TaskBox = React.createClass({
 	getInitialState: function() { //initialize data
 		return {data: []};
@@ -158,12 +174,15 @@ var TaskElement = React.createClass({
   render: function() {
 		if(!this.state.editing){
 			return (
-			  <div className="taskElement">
-					<i className="material-icons">keyboard_arrow_up</i>
-			   	<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
-			   	<i className="material-icons" onClick={this.Delete}>delete</i>
-			   	<h3>{this.state.text}</h3>
-			  </div>
+				<div className="taskElement">
+	            	<div className="textArea"><h3>{this.state.text}</h3></div>
+	            	<div className="iconsArea">
+	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
+	            		<i className="material-icons" onClick={this.Delete}>delete</i>
+	            		<i className="material-icons">keyboard_arrow_down</i>
+	            		<i className="material-icons">keyboard_arrow_up</i>
+	            	</div>
+				</div>
 		   );
 		}else{
 			return (

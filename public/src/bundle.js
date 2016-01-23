@@ -67,6 +67,22 @@
 	  opacity: 0.6,
 	};
 
+	var statusStyleOne = {
+		backgroundColor: Colors.deepPurple100,
+	};
+
+	var statusStyleOne = {
+		backgroundColor: Colors.brown100,
+	};
+
+	var statusStyleOne = {
+		backgroundColor: Colors.indigo100,
+	};
+
+	var appBarsStyle = {
+		backgroundColor: Colors.blueGrey600,
+	};
+
 	var TaskBox = React.createClass({displayName: "TaskBox",
 		getInitialState: function() { //initialize data
 			return {data: []};
@@ -204,12 +220,15 @@
 	  render: function() {
 			if(!this.state.editing){
 				return (
-				  React.createElement("div", {className: "taskElement"}, 
-						React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up"), 
-				   	React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
-				   	React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
-				   	React.createElement("h3", null, this.state.text)
-				  )
+					React.createElement("div", {className: "taskElement"}, 
+		            	React.createElement("div", {className: "textArea"}, React.createElement("h3", null, this.state.text)), 
+		            	React.createElement("div", {className: "iconsArea"}, 
+		            		React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
+		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
+		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
+		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
+		            	)
+					)
 			   );
 			}else{
 				return (
