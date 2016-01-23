@@ -59,21 +59,21 @@
 	var FlatButton = __webpack_require__(247);
 
 	var circleButtonStyle = {
-	  height: 50,
-	  width: 50,
-	  backgroundColor: Colors.cyan100,
-	  textAlign: 'center',
-	  display: 'inline-block',
-	  opacity: 0.6,
+		height: 50,
+		width: 50,
+		backgroundColor: Colors.cyan100,
+		textAlign: 'center',
+		display: 'inline-block',
+		opacity: 0.6,
 	};
 
 	var circleButtonStyleHover = {
-	  height: 50,
-	  width: 50,
-	  backgroundColor: Colors.cyan100,
-	  textAlign: 'center',
-	  display: 'inline-block',
-	  opacity: 1,
+		height: 50,
+		width: 50,
+		backgroundColor: Colors.cyan100,
+		textAlign: 'center',
+		display: 'inline-block',
+		opacity: 1,
 	};
 	var appBarsStyle = {
 		backgroundColor: Colors.blueGrey600,
@@ -84,18 +84,18 @@
 			return {data: []};
 		},
 		loadTasksFromServer: function() {
-				$.ajax({
-					url: this.props.url,
-					dataType: 'json',
-					cache: false,
-					success: function(data) {
-						this.setState({data: data});
-					}.bind(this),
-					error: function(xhr, status, err) {
-						console.error(this.props.url, status, err.toString());
-					}.bind(this)
-				});	
-	  },
+			$.ajax({
+				url: this.props.url,
+				dataType: 'json',
+				cache: false,
+				success: function(data) {
+					this.setState({data: data});
+				}.bind(this),
+				error: function(xhr, status, err) {
+					console.error(this.props.url, status, err.toString());
+				}.bind(this)
+			});	
+		},
 		componentDidMount: function() { 
 			this.loadTasksFromServer();
 			setInterval(this.loadTasksFromServer, 5000)
@@ -114,8 +114,8 @@
 				error: function(xhr, status, err) {
 					console.error(this.props.url, status, err.toString());
 				}.bind(this)
-				});
-			},
+			});
+		},
 		handleAdd: function(){
 			$.ajax({																																	
 				url: this.props.url, 
@@ -144,15 +144,29 @@
 				}.bind(this)
 			});
 		},
+		handleMove: function(key, direction){
+			$.ajax({																																	
+				url: this.props.url, 
+				dataType: 'json',
+				type: 'POST',
+				data: {"method": "move", "key": key, "dir": direction},
+				success: function(data) {
+					this.setState({data: data});
+				}.bind(this),
+				error: function(xhr, status, err) {
+					console.error(this.props.url, status, err.toString());
+				}.bind(this)
+			});
+		},
 		render: function() { 
 			return (
 				React.createElement(Paper, {className: "paperE", zDepth: 5}, 
-				  	React.createElement(AppBar, {
-						showMenuIconButton: false, 
-				 		title: "Just To-Do. No shit"}
-				 		), 
-					React.createElement(TaskList, {data: this.state.data, onDelete: this.handleDelete, onEdit: this.handleEdit}), 
-					React.createElement(AddNewTask, {onAdd: this.handleAdd})
+				React.createElement(AppBar, {
+				showMenuIconButton: false, 
+				title: "Just To-Do. No shit"}
+				), 
+				React.createElement(TaskList, {data: this.state.data, onDelete: this.handleDelete, onEdit: this.handleEdit, onMove: this.handleMove}), 
+				React.createElement(AddNewTask, {onAdd: this.handleAdd})
 				)
 			);
 		}
@@ -170,14 +184,14 @@
 			}) ;	
 		},
 		render: function() {
-	  	  var taskNodes = this.props.data.map(function(task) {
-	    	  return (
-	        	React.createElement(TaskElement, {key: task.id, id: task.id, status: task.status, text: task.text, onEdit: this.props.onEdit, onDelete: this.props.onDelete})
-	      	  );
-					}, this);
+			var taskNodes = this.props.data.map(function(task) {
+				return (
+					React.createElement(TaskElement, {key: task.id, id: task.id, status: task.status, text: task.text, onEdit: this.props.onEdit, onDelete: this.props.onDelete, onMove: this.props.onMove})
+				);
+			}, this);
 			return (
 				React.createElement("div", {className: "taskList"}, 
-					taskNodes
+				taskNodes
 				)
 			);
 		}
@@ -185,12 +199,12 @@
 
 	var TaskElement = React.createClass({displayName: "TaskElement",
 		getInitialState: function() {
-		    return {
-			    text : "",
-			    id : 0,
-			    status: {},
-					editing: false
-		    }
+			return {
+				text : "",
+				id : 0,
+				status: {},
+				editing: false
+			}
 		},
 		componentDidMount: function() {
 			this.setState({
@@ -205,7 +219,7 @@
 							backgroundColor: Colors.brown100
 						}
 					})
-				break;
+					break;
 				case "2":
 					this.setState({
 						style: {
@@ -221,41 +235,44 @@
 
 			};
 		},
-		Delete: function() {
+		deleteTask: function() {
 			this.props.onDelete(this.state.id);
 		},
 		toEditMode: function() {
 			this.setState({
 				editing: true
-			})
+			});
 		},
-		Edit: function(e) {
-			this.props.onEdit(this.state.id, e.target.value)
+		editTask: function(e) {
+			this.props.onEdit(this.state.id, e.target.value);
 			this.setState({
 				editing: false,
 				text: e.target.value
-			})
-				},
-	  render: function() {
+			});
+		},
+		moveTask: function(direction){
+			this.props.onMove(this.state.id, direction) //1 means move UP and 0 means move DOWN
+		},
+		render: function() {
 			if(!this.state.editing){
 				return (
 					React.createElement("div", {className: "taskElement", style: this.state.style}, 
-									React.createElement("div", {className: "textArea"}, 
-									React.createElement("p", null, this.state.text)
-									), 
-		            	React.createElement("div", {className: "iconsArea"}, 
-		            		React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
-		            		React.createElement("i", {className: "material-icons", onClick: this.Delete}, "delete"), 
-		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_down"), 
-		            		React.createElement("i", {className: "material-icons"}, "keyboard_arrow_up")
-									)
+					React.createElement("div", {className: "textArea"}, 
+					React.createElement("p", null, this.state.text)
+					), 
+					React.createElement("div", {className: "iconsArea"}, 
+					React.createElement("i", {className: "material-icons", onClick: this.toEditMode}, "mode_edit"), 
+					React.createElement("i", {className: "material-icons", onClick: this.deleteTask}, "delete"), 
+					React.createElement("i", {className: "material-icons", onClick: this.moveTask.bind(this, 0)}, "keyboard_arrow_down"), 
+					React.createElement("i", {className: "material-icons", onClick: this.moveTask.bind(this, 1)}, "keyboard_arrow_up")
 					)
-			   );
+					)
+				);
 			}else{
 				return (
 					React.createElement("div", {className: "taskElement"}, 
-				   React.createElement(TextField, {onEnterKeyDown: this.Edit})
-				  )
+					React.createElement(TextField, {onEnterKeyDown: this.editTask})
+					)
 				);
 			}
 		}
@@ -275,24 +292,24 @@
 				currentButtonStyle:circleButtonStyle
 			});
 		},
-	    render: function() {
-	    	var currentButtonStyle = this.state.currentButtonStyle;
-	        return (
-	            React.createElement("div", {className: "addNewTask"}, 
-	           		React.createElement(Paper, {style: currentButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, 
-	           		onClick: this.props.onAdd, 
-	           		onMouseEnter: this.handleMouseEnter, 
-	           		onMouseLeave: this.handleMouseLeave}, 
-	            	React.createElement("i", {className: "material-icons"}, "add")
-	            	)
-	            )
-	        );
-	    }
+		render: function() {
+			var currentButtonStyle = this.state.currentButtonStyle;
+			return (
+				React.createElement("div", {className: "addNewTask"}, 
+				React.createElement(Paper, {style: currentButtonStyle, zDepth: 3, className: "circleButtonStyle", circle: true, 
+				onClick: this.props.onAdd, 
+				onMouseEnter: this.handleMouseEnter, 
+				onMouseLeave: this.handleMouseLeave}, 
+				React.createElement("i", {className: "material-icons"}, "add")
+				)
+				)
+			);
+		}
 	});
 
 	ReactDOM.render(
 		React.createElement(TaskBox, {url: "/api/tasks", fs: __webpack_require__(249)}),
-		document.getElementById('content')
+			document.getElementById('content')
 	);
 
 

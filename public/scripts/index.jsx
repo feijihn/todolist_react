@@ -13,21 +13,21 @@ var TextField = require('material-ui/lib/text-field');
 var FlatButton = require('material-ui/lib/flat-button');
 
 var circleButtonStyle = {
-  height: 50,
-  width: 50,
-  backgroundColor: Colors.cyan100,
-  textAlign: 'center',
-  display: 'inline-block',
-  opacity: 0.6,
+	height: 50,
+	width: 50,
+	backgroundColor: Colors.cyan100,
+	textAlign: 'center',
+	display: 'inline-block',
+	opacity: 0.6,
 };
 
 var circleButtonStyleHover = {
-  height: 50,
-  width: 50,
-  backgroundColor: Colors.cyan100,
-  textAlign: 'center',
-  display: 'inline-block',
-  opacity: 1,
+	height: 50,
+	width: 50,
+	backgroundColor: Colors.cyan100,
+	textAlign: 'center',
+	display: 'inline-block',
+	opacity: 1,
 };
 var appBarsStyle = {
 	backgroundColor: Colors.blueGrey600,
@@ -38,18 +38,18 @@ var TaskBox = React.createClass({
 		return {data: []};
 	},
 	loadTasksFromServer: function() {
-			$.ajax({
-				url: this.props.url,
-				dataType: 'json',
-				cache: false,
-				success: function(data) {
-					this.setState({data: data});
-				}.bind(this),
-				error: function(xhr, status, err) {
-					console.error(this.props.url, status, err.toString());
-				}.bind(this)
-			});	
-  },
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			cache: false,
+			success: function(data) {
+				this.setState({data: data});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});	
+	},
 	componentDidMount: function() { 
 		this.loadTasksFromServer();
 		setInterval(this.loadTasksFromServer, 5000)
@@ -68,8 +68,8 @@ var TaskBox = React.createClass({
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
-			});
-		},
+		});
+	},
 	handleAdd: function(){
 		$.ajax({																																	
 			url: this.props.url, 
@@ -98,15 +98,29 @@ var TaskBox = React.createClass({
 			}.bind(this)
 		});
 	},
+	handleMove: function(key, direction){
+		$.ajax({																																	
+			url: this.props.url, 
+			dataType: 'json',
+			type: 'POST',
+			data: {"method": "move", "key": key, "dir": direction},
+			success: function(data) {
+				this.setState({data: data});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
 	render: function() { 
 		return (
 			<Paper className="paperE" zDepth={5}>
-			  	<AppBar 
-					showMenuIconButton={false}
-			 		title="Just To-Do. No shit"
-			 		/>
-				<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit}/>
-				<AddNewTask onAdd={this.handleAdd}/>
+			<AppBar 
+			showMenuIconButton={false}
+			title="Just To-Do. No shit"
+			/>
+			<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit} onMove={this.handleMove}/>
+			<AddNewTask onAdd={this.handleAdd}/>
 			</Paper>
 		);
 	}
@@ -124,14 +138,14 @@ var TaskList = React.createClass({
 		}) ;	
 	},
 	render: function() {
-  	  var taskNodes = this.props.data.map(function(task) {
-    	  return (
-        	<TaskElement key={task.id} id={task.id} status={task.status} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete}/>
-      	  );
-				}, this);
+		var taskNodes = this.props.data.map(function(task) {
+			return (
+				<TaskElement key={task.id} id={task.id} status={task.status} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete} onMove={this.props.onMove}/>
+			);
+		}, this);
 		return (
 			<div className="taskList">
-				{taskNodes}
+			{taskNodes}
 			</div>
 		);
 	}
@@ -139,12 +153,12 @@ var TaskList = React.createClass({
 
 var TaskElement = React.createClass({
 	getInitialState: function() {
-	    return {
-		    text : "",
-		    id : 0,
-		    status: {},
-				editing: false
-	    }
+		return {
+			text : "",
+			id : 0,
+			status: {},
+			editing: false
+		}
 	},
 	componentDidMount: function() {
 		this.setState({
@@ -159,7 +173,7 @@ var TaskElement = React.createClass({
 						backgroundColor: Colors.brown100
 					}
 				})
-			break;
+				break;
 			case "2":
 				this.setState({
 					style: {
@@ -175,41 +189,44 @@ var TaskElement = React.createClass({
 
 		};
 	},
-	Delete: function() {
+	deleteTask: function() {
 		this.props.onDelete(this.state.id);
 	},
 	toEditMode: function() {
 		this.setState({
 			editing: true
-		})
+		});
 	},
-	Edit: function(e) {
-		this.props.onEdit(this.state.id, e.target.value)
+	editTask: function(e) {
+		this.props.onEdit(this.state.id, e.target.value);
 		this.setState({
 			editing: false,
 			text: e.target.value
-		})
-			},
-  render: function() {
+		});
+	},
+	moveTask: function(direction){
+		this.props.onMove(this.state.id, direction) //1 means move UP and 0 means move DOWN
+	},
+	render: function() {
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}>
-								<div className="textArea">
-								<p>{this.state.text}</p>
-								</div>
-	            	<div className="iconsArea">
-	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
-	            		<i className="material-icons" onClick={this.Delete}>delete</i>
-	            		<i className="material-icons">keyboard_arrow_down</i>
-	            		<i className="material-icons">keyboard_arrow_up</i>
-								</div> 
+				<div className="textArea">
+				<p>{this.state.text}</p>
 				</div>
-		   );
+				<div className="iconsArea">
+				<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
+				<i className="material-icons" onClick={this.deleteTask}>delete</i>
+				<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
+				<i className="material-icons" onClick={this.moveTask.bind(this, 1)}>keyboard_arrow_up</i>
+				</div> 
+				</div>
+			);
 		}else{
 			return (
 				<div className="taskElement">
-			   <TextField onEnterKeyDown={this.Edit} />
-			  </div>
+				<TextField onEnterKeyDown={this.editTask} />
+				</div>
 			);
 		}
 	}
@@ -229,22 +246,22 @@ var AddNewTask = React.createClass({
 			currentButtonStyle:circleButtonStyle
 		});
 	},
-    render: function() {
-    	var currentButtonStyle = this.state.currentButtonStyle;
-        return (
-            <div className="addNewTask">
-           		<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
-           		onClick={this.props.onAdd}
-           		onMouseEnter={this.handleMouseEnter}
-           		onMouseLeave={this.handleMouseLeave}>
-            	<i className="material-icons" >add</i>
-            	</Paper>
-            </div>
-        );
-    }
+	render: function() {
+		var currentButtonStyle = this.state.currentButtonStyle;
+		return (
+			<div className="addNewTask">
+			<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
+			onClick={this.props.onAdd}
+			onMouseEnter={this.handleMouseEnter}
+			onMouseLeave={this.handleMouseLeave}>
+			<i className="material-icons" >add</i>
+			</Paper>
+			</div>
+		);
+	}
 });
 
 ReactDOM.render(
 	<TaskBox url='/api/tasks' fs={require('fs')}/>,
-	document.getElementById('content')
+		document.getElementById('content')
 );
