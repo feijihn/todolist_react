@@ -60,13 +60,13 @@ body{
 
 .iconsArea {
     height: 100%;
-    width: 15%;
+    width: auto;
     float:right;
     opacity: 0.5;
 }
 
 .textArea {
-    width: 85%;
+    width: auto;
     height: 100%;
     float:left;
 }
