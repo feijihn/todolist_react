@@ -86,7 +86,7 @@ var TaskBox = React.createClass({
 			}.bind(this)
 		});
 	},
-	render: function() { //after server implemented, "this.props.data" should be replaced with "this.state.data"
+	render: function() { 
 		return (
 			<Paper className="paperE" zDepth={5}>
 			  	<AppBar
