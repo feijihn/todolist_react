@@ -11,6 +11,10 @@ var Toolbar = require('material-ui/lib/toolbar/toolbar');
 var ToolbarTitle = require('material-ui/lib/toolbar/toolbar-title');
 var TextField = require('material-ui/lib/text-field');
 var FlatButton = require('material-ui/lib/flat-button');
+var IconButton = require('material-ui/lib/icon-button');
+var MenuItem = require('material-ui/lib/menus/menu-item');
+var Divider = require('material-ui/lib/divider');
+var IconMenu = require('material-ui/lib/menus/icon-menu');
 
 var circleButtonStyle = {
   height: 50,
@@ -174,7 +178,6 @@ var TaskElement = React.createClass({
 						backgroundColor: Colors.deepPurple100
 					}			
 				})
-
 		};
 	},
 	Delete: function() {
@@ -196,9 +199,9 @@ var TaskElement = React.createClass({
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}>
-								<div className="textArea">
-								<h4>{this.state.text}</h4>
-								</div>
+					<div className="textArea">
+						<h4>{this.state.text}</h4>
+					</div>
 	            	<div className="iconsArea">
 	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 	            		<i className="material-icons" onClick={this.Delete}>delete</i>
@@ -210,6 +213,7 @@ var TaskElement = React.createClass({
 		}else{ /*think about adding fullWidth={true} property*/
 			return (
 				<div className="taskElement">
+				<div className="checkBoxIcon"></div>
 			   <TextField onEnterKeyDown={this.Edit}
 			   defaultValue={this.state.text}
 			   underlineStyle={{borderColor:Colors.blueGrey300}}
