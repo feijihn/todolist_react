@@ -47,7 +47,7 @@ app.post('/api/tasks', function(req, res) {
 		if(method == 'append'){
 		 var newTask= {
 				id: Date.now(),
-				priority: req.body.priority,
+				status: req.body.status,
 				text: req.body.text,
 			};
 			tasks.push(newTask);

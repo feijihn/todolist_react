@@ -4,7 +4,7 @@ var $ = require('jquery');
 var ReactDOM = require('react-dom');
 var {render} = require('react-dom');
 var Paper = require('material-ui/lib/paper');
-var Colors = require('material-ui/lib/styles/');
+var Colors = require('material-ui/lib/styles/colors');
 var FontIcon = require('material-ui/lib/font-icon');
 var AppBar = require('material-ui/lib/app-bar');
 var Toolbar = require('material-ui/lib/toolbar/toolbar');
@@ -29,19 +29,6 @@ var circleButtonStyleHover = {
   display: 'inline-block',
   opacity: 1,
 };
-
-var statusStyleOne = {
-	backgroundColor: Colors.deepPurple100,
-};
-
-var statusStyleOne = {
-	backgroundColor: Colors.brown100,
-};
-
-var statusStyleOne = {
-	backgroundColor: Colors.indigo100,
-};
-
 var appBarsStyle = {
 	backgroundColor: Colors.blueGrey600,
 };
@@ -88,7 +75,7 @@ var TaskBox = React.createClass({
 			url: this.props.url, 
 			dataType: 'json',
 			type: 'POST',
-			data: {"method": "append", "priority": 1, "text": "Empty task."},
+			data: {"method": "append", "status": 1, "text": "Empty task."},
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),
@@ -114,9 +101,10 @@ var TaskBox = React.createClass({
 	render: function() { 
 		return (
 			<Paper className="paperE" zDepth={5}>
-			  	<AppBar
+			  	<AppBar 
+					showMenuIconButton={false}
 			 		title="Just To-Do. No shit"
-			 		iconClassNameRight="muidocs-icovigation-expand-more"/>
+			 		/>
 				<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit}/>
 				<AddNewTask onAdd={this.handleAdd}/>
 			</Paper>
@@ -138,7 +126,7 @@ var TaskList = React.createClass({
 	render: function() {
   	  var taskNodes = this.props.data.map(function(task) {
     	  return (
-        	<TaskElement key={task.id} id={task.id} priority={task.priority} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete}/>
+        	<TaskElement key={task.id} id={task.id} status={task.status} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete}/>
       	  );
 				}, this);
 		return (
@@ -154,7 +142,7 @@ var TaskElement = React.createClass({
 	    return {
 		    text : "",
 		    id : 0,
-		    priority : 0,
+		    status: {},
 				editing: false
 	    }
 	},
@@ -162,8 +150,30 @@ var TaskElement = React.createClass({
 		this.setState({
 			text: this.props.text,
 			id: this.props.id,
-			priority: this.props.priority
+			status: this.props.status,
 		});
+		switch(this.props.status){
+			case "1":
+				this.setState({
+					style: {
+						backgroundColor: Colors.brown100
+					}
+				})
+			break;
+			case "2":
+				this.setState({
+					style: {
+						backgroundColor: Colors.indigo100
+					}			
+				})
+			case "3":
+				this.setState({
+					style: {
+						backgroundColor: Colors.deepPurple100
+					}			
+				})
+
+		};
 	},
 	Delete: function() {
 		this.props.onDelete(this.state.id);
@@ -183,7 +193,7 @@ var TaskElement = React.createClass({
   render: function() {
 		if(!this.state.editing){
 			return (
-				<div className="taskElement">
+				<div className="taskElement" style={this.state.style}>
 	            	<div className="textArea"><h3>{this.state.text}</h3></div>
 	            	<div className="iconsArea">
 	            		<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
