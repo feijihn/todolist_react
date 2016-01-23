@@ -38,8 +38,9 @@ var TaskBox = React.createClass({
 				}.bind(this)
 			});	
   },
-	componentDidMount: function() { //update data with this.props.updateInterval interval
+	componentDidMount: function() { 
 		this.loadTasksFromServer();
+		setInterval(this.loadTasksFromServer, 5000)
 	},
 	handleDelete: function(key){
 		$.ajax({
@@ -158,6 +159,7 @@ var TaskElement = React.createClass({
 		if(!this.state.editing){
 			return (
 			  <div className="taskElement">
+					<i className="material-icons">keyboard_arrow_up</i>
 			   	<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 			   	<i className="material-icons" onClick={this.Delete}>delete</i>
 			   	<h3>{this.state.text}</h3>

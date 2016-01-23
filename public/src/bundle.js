@@ -126,8 +126,8 @@
 			});
 		},
 		componentDidMount: function componentDidMount() {
-			//update data with this.props.updateInterval interval
 			this.loadTasksFromServer();
+			setInterval(this.loadTasksFromServer, 5000);
 		},
 		handleDelete: function handleDelete(key) {
 			_jquery2.default.ajax({
@@ -250,6 +250,11 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'taskElement' },
+					_react2.default.createElement(
+						'i',
+						{ className: 'material-icons' },
+						'keyboard_arrow_up'
+					),
 					_react2.default.createElement(
 						'i',
 						{ className: 'material-icons', onClick: this.toEditMode },
