@@ -1,4 +1,4 @@
 node_modules
 data
-/public/src/bundle.js*
+/public/src/
 *~
