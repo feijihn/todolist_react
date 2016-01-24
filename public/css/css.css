@@ -47,7 +47,7 @@ body{
 }
 
 .circleButtonStyle {
-    padding-top: 13px;
+    line-height: 65px;
 }
 
 .iconsArea {
@@ -59,16 +59,4 @@ body{
 
 .textArea {
     float:left;
-}
-
-.checkBoxIcon {
-    border: 2px solid rgba(0,0,0,0.6);
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
-    background-color: #cfd8dc;
-}
-
-.checkBoxIcon:hover {
-    cursor: poiner; /*not working for some reason*/
 }

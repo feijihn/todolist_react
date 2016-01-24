@@ -5,23 +5,9 @@ var ReactDOM = require('react-dom');
 var {render} = require('react-dom');
 var Paper = require('material-ui/lib/paper');
 var Colors = require('material-ui/lib/styles/colors');
-var FontIcon = require('material-ui/lib/font-icon');
 var AppBar = require('material-ui/lib/app-bar');
-var Toolbar = require('material-ui/lib/toolbar/toolbar');
-var ToolbarTitle = require('material-ui/lib/toolbar/toolbar-title');
 var TextField = require('material-ui/lib/text-field');
-var FlatButton = require('material-ui/lib/flat-button');
-var IconButton = require('material-ui/lib/icon-button');
-var MenuItem = require('material-ui/lib/menus/menu-item');
-var Divider = require('material-ui/lib/divider');
-var IconMenu = require('material-ui/lib/menus/icon-menu');
-var DropDownMenu = require('material-ui/lib/DropDownMenu');
-var Checkbox = require('material-ui/lib/checkbox');
-var RadioButton = require('material-ui/lib/radio-button');
-var RadioButtonGroup = require('material-ui/lib/radio-button-group');
-var Toggle = require('material-ui/lib/toggle');
 var RaisedButton = require('material-ui/lib/raised-button');
-var FlatButton = require('material-ui/lib/flat-button');
 
 var circleButtonStyle = {
 	height: 50,
@@ -128,9 +114,9 @@ var TaskBox = React.createClass({
 		return (
 			<Paper className="paperE" zDepth={5}>
 			<AppBar 
-			showMenuIconButton={false}
-			title="Just To-Do. No shit"
-			style={appBarsStyle}
+				showMenuIconButton={false}
+				title="Just To-Do. No shit"
+				style={appBarsStyle}
 			/>
 			<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit} onMove={this.handleMove}/>
 			<AddNewTask onAdd={this.handleAdd}/>
@@ -255,18 +241,20 @@ var TaskElement = React.createClass({
 		}else{ /*think about adding fullWidth={true} property*/
 		return (
 			<div className="taskElement" style={this.state.style}>
-			<TextField 
-			onChange={this.textChange}
-			defaultValue={this.state.text}
-			underlineStyle={{borderColor:Colors.blueGrey600}}
-			underlineFocusStyle={{borderColor:Colors.red100}} 
-			multiLine={true}
-			errorStyle={{color:Colors.blueGrey500}}
-			errorText={"Press \"Enter\" to submit your task"}
-			onEnterKeyDown={this.editTask}/><br/>
-			<RaisedButton label="brown" backgroundColor={Colors.brown100} onClick={this.setStatus.bind(this, "1")}/>
-			<RaisedButton label="blue" backgroundColor={Colors.indigo100} onClick={this.setStatus.bind(this, "2")}/>
-			<RaisedButton label="purple" backgroundColor={Colors.deepPurple100} onClick={this.setStatus.bind(this, "3")}/>
+				<TextField 
+					onChange={this.textChange}
+					defaultValue={this.state.text}
+					underlineStyle={{borderColor:Colors.blueGrey600}}
+					underlineFocusStyle={{borderColor:Colors.red100}} 
+					multiLine={true}
+					errorStyle={{color:Colors.blueGrey500}}
+					errorText={"Press \"Enter\" to submit your task"}
+					onEnterKeyDown={this.editTask}
+				/>
+				<br/>
+				<RaisedButton label="brown" backgroundColor={Colors.brown100} onClick={this.setStatus.bind(this, "1")}/>
+				<RaisedButton label="blue" backgroundColor={Colors.indigo100} onClick={this.setStatus.bind(this, "2")}/>
+				<RaisedButton label="purple" backgroundColor={Colors.deepPurple100} onClick={this.setStatus.bind(this, "3")}/>
 			</div>
 		);
 		}
@@ -292,11 +280,12 @@ var AddNewTask = React.createClass({
 		return (
 			<div className="addNewTask" style={appBarsStyle}>
 			<Paper style={currentButtonStyle} zDepth={3} className="circleButtonStyle" circle={true} 
-			onClick={this.props.onAdd}
-			onMouseEnter={this.handleMouseEnter}
-			onMouseLeave={this.handleMouseLeave}>
-			<i className="material-icons" >add</i>
-			</Paper>
+				onClick={this.props.onAdd}
+				onMouseEnter={this.handleMouseEnter}
+				onMouseLeave={this.handleMouseLeave}>
+
+				<i className="material-icons" >add</i>
+				</Paper>
 			</div>
 		);
 	}
