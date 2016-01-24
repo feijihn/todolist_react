@@ -52,9 +52,15 @@ body{
 
 .iconsArea {
     float:right;
-    opacity: 0.5;
     position: absolute;
     right: 5%;
+    background-color: #546e7a;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.iconsArea i {
+    color:white;
 }
 
 .textArea {

@@ -156,7 +156,8 @@ var TaskElement = React.createClass({
 			text : "",
 			id : 0,
 			status: {},
-			editing: false
+			editing: false,
+			showIcons: false
 		}
 	},
 	componentDidMount: function() {
@@ -223,22 +224,36 @@ var TaskElement = React.createClass({
 	moveTask: function(direction){
 		this.props.onMove(this.state.id, direction) //1 means move UP and 0 means move DOWN
 	},
+	handleMouseEnter: function() {
+		this.setState({
+			showIcons: true
+		});
+	},
+	handleMouseLeave: function() {
+		this.setState({
+			showIcons: false
+		});
+	},
 	render: function() {
 		if(!this.state.editing){
 			return (
-				<div className="taskElement" style={this.state.style}>
-					<div className="textArea">
+				<div className="taskElement" style={this.state.style}
+				onMouseEnter={this.handleMouseEnter}
+				onMouseLeave={this.handleMouseLeave}>
+					<div className="textArea" style={this.state.showIcons ? {opacity: 0.5} : null}>
 						<h4>{this.state.text}</h4>
 					</div>
-				<div className="iconsArea">
-					<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
-					<i className="material-icons" onClick={this.deleteTask}>delete</i>
-					<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
-					<i className="material-icons" onClick={this.moveTask.bind(this, 1)}>keyboard_arrow_up</i>
-				</div> 
+					{this.state.showIcons ? 
+					<div className="iconsArea">
+						<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
+						<i className="material-icons" onClick={this.deleteTask}>delete</i>
+						<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
+						<i className="material-icons" onClick={this.moveTask.bind(this, 1)}>keyboard_arrow_up</i>
+					</div> 
+					: null }
 				</div>		   
 			);
-		}else{ /*think about adding fullWidth={true} property*/
+		}else{
 		return (
 			<div className="taskElement" style={this.state.style}>
 				<TextField 
