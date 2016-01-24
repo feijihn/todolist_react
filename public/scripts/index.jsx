@@ -15,6 +15,7 @@ var IconButton = require('material-ui/lib/icon-button');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 var Divider = require('material-ui/lib/divider');
 var IconMenu = require('material-ui/lib/menus/icon-menu');
+var DropDownMenu = require('material-ui/lib/DropDownMenu');
 
 var circleButtonStyle = {
 	height: 50,
@@ -123,6 +124,7 @@ var TaskBox = React.createClass({
 			<AppBar 
 			showMenuIconButton={false}
 			title="Just To-Do. No shit"
+			style={appBarsStyle}
 			/>
 			<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit} onMove={this.handleMove}/>
 			<AddNewTask onAdd={this.handleAdd}/>
@@ -229,16 +231,17 @@ var TaskElement = React.createClass({
 		}else{ /*think about adding fullWidth={true} property*/
 		return (
 			<div className="taskElement">
-			<div className="checkBoxIcon"></div>
-			<TextField onEnterKeyDown={this.Edit}
+			<TextField 
 			defaultValue={this.state.text}
 			underlineStyle={{borderColor:Colors.blueGrey300}}
 			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
 			multiLine={true}
-			errorText="Press Enter to submit your task"
 			errorStyle={{color:Colors.blueGrey300}}
-			onEnterKeyDown={this.editTask}
-			/>
+			errorText={"Press Enter to submit your task"}
+			onEnterKeyDown={this.editTask}/>
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
 			</div>
 		);
 		}
