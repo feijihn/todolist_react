@@ -16,6 +16,12 @@ var MenuItem = require('material-ui/lib/menus/menu-item');
 var Divider = require('material-ui/lib/divider');
 var IconMenu = require('material-ui/lib/menus/icon-menu');
 var DropDownMenu = require('material-ui/lib/DropDownMenu');
+var Checkbox = require('material-ui/lib/checkbox');
+var RadioButton = require('material-ui/lib/radio-button');
+var RadioButtonGroup = require('material-ui/lib/radio-button-group');
+var Toggle = require('material-ui/lib/toggle');
+var RaisedButton = require('material-ui/lib/raised-button');
+var FlatButton = require('material-ui/lib/flat-button');
 
 var circleButtonStyle = {
 	height: 50,
@@ -195,7 +201,7 @@ var TaskElement = React.createClass({
 			case "3":
 				this.setState({
 					style: {
-						backgroundColor: Colors.deepPurple300
+						backgroundColor: Colors.deepPurple100
 					}			
 				})
 				break;
@@ -252,15 +258,15 @@ var TaskElement = React.createClass({
 			<TextField 
 			onChange={this.textChange}
 			defaultValue={this.state.text}
-			underlineStyle={{borderColor:Colors.blueGrey300}}
-			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
+			underlineStyle={{borderColor:Colors.blueGrey600}}
+			underlineFocusStyle={{borderColor:Colors.red100}} 
 			multiLine={true}
-			errorStyle={{color:Colors.blueGrey300}}
-			errorText={"Press Enter to submit your task"}
-			onEnterKeyDown={this.editTask}/>
-			<p onClick={this.setStatus.bind(this, "1")}>1</p>
-			<p onClick={this.setStatus.bind(this, "2")}>2</p>
-			<p onClick={this.setStatus.bind(this, "3")}>3</p>
+			errorStyle={{color:Colors.blueGrey500}}
+			errorText={"Press \"Enter\" to submit your task"}
+			onEnterKeyDown={this.editTask}/><br/>
+			<RaisedButton label="brown" backgroundColor={Colors.brown100} onClick={this.setStatus.bind(this, "1")}/>
+			<RaisedButton label="blue" backgroundColor={Colors.indigo100} onClick={this.setStatus.bind(this, "2")}/>
+			<RaisedButton label="purple" backgroundColor={Colors.deepPurple100} onClick={this.setStatus.bind(this, "3")}/>
 			</div>
 		);
 		}
