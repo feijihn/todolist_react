@@ -2,7 +2,6 @@ var React = require('react');
 var ajax = require('ajax');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
-var {render} = require('react-dom');
 var Paper = require('material-ui/lib/paper');
 var Colors = require('material-ui/lib/styles/colors');
 var AppBar = require('material-ui/lib/app-bar');

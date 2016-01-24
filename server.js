@@ -32,7 +32,6 @@ app.get('/api/tasks', function(req, res) {
 });
 
 app.post('/api/tasks', function(req, res) {
-	console.log('post event!')
 	fs.readFile(DB_FILE, function(err, data) { //if post req got to /api/tasks/ read DB_FILE
 		if (err) {
 			console.error(err);
@@ -65,13 +64,11 @@ app.post('/api/tasks', function(req, res) {
 					var temp = tasks[idToMove]
 					if(req.body.dir == 1){
 						if(tasks[idToMove-1] != undefined){
-							console.log('moving task[' + idToMove + '] up');
 							tasks[idToMove] = tasks[idToMove-1];
 							tasks[idToMove-1] = temp;
 						}
 					}else{
 						if(tasks[idToMove+1] != undefined){
-							console.log('moving task[' + idToMove + '] down');
 							tasks[idToMove] = tasks[idToMove+1];
 							tasks[idToMove+1] = temp;
 						}
