@@ -34,7 +34,8 @@ body{
     width: 100%;
     display: inline-block;
 	vertical-align: top;
-    word-break: normal; /*a little crutch here. should be discussed later. made it to force word wrapping*/
+		word-break: break-all;
+		word-wrap: break-word;
 }
 
 .paperE {
