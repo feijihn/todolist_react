@@ -80,7 +80,7 @@ var TaskBox = React.createClass({
 			url: this.props.url, 
 			dataType: 'json',
 			type: 'POST',
-			data: {"method": "append", "status": 1, "text": "Empty task."},
+			data: {"method": "append", "status": 1, "text": "New task"},
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),
@@ -123,6 +123,7 @@ var TaskBox = React.createClass({
 			<AppBar 
 			showMenuIconButton={false}
 			title="Just To-Do. No shit"
+			style={appBarsStyle}
 			/>
 			<TaskList data={this.state.data} onDelete={this.handleDelete} onEdit={this.handleEdit} onMove={this.handleMove}/>
 			<AddNewTask onAdd={this.handleAdd}/>
@@ -145,7 +146,7 @@ var TaskList = React.createClass({
 	render: function() {
 		var taskNodes = this.props.data.map(function(task) {
 			return (
-				<TaskElement key={task.id} id={task.id} status={task.status} text={task.text} onEdit={this.props.onEdit} onDelete={this.props.onDelete} onMove={this.props.onMove}/>
+				<TaskElement key={task.id} id={task.id} status={task.status} text={task.text} editing={task.editing} onEdit={this.props.onEdit} onDelete={this.props.onDelete} onMove={this.props.onMove}/>
 			);
 		}, this);
 		return (
@@ -170,6 +171,7 @@ var TaskElement = React.createClass({
 			text: this.props.text,
 			id: this.props.id,
 			status: this.props.status,
+			editing: this.props.editing
 		});
 		switch(this.props.status){
 			case "1":
@@ -229,8 +231,7 @@ var TaskElement = React.createClass({
 		}else{ /*think about adding fullWidth={true} property*/
 		return (
 			<div className="taskElement">
-			<div className="checkBoxIcon"></div>
-			<TextField onEnterKeyDown={this.Edit}
+			<TextField 
 			defaultValue={this.state.text}
 			underlineStyle={{borderColor:Colors.blueGrey300}}
 			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
