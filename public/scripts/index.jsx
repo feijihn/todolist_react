@@ -236,14 +236,13 @@ var TaskElement = React.createClass({
 		});
 	},
 	render: function() {
-
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
 					<div className="textArea" style={this.state.showIcons ? {opacity: 0.5} : null}>
-						<h4>{this.state.text}</h4>
+						<h4 onDoubleClick={this.toEditMode}>{this.state.text}</h4>
 					</div>
 					{this.state.showIcons ? 
 					<div className="iconsArea">
