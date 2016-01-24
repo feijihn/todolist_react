@@ -235,21 +235,20 @@ var TaskElement = React.createClass({
 		});
 	},
 	render: function() {
-
 		if(!this.state.editing){
 			return (
 				<div className="taskElement" style={this.state.style}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
 					<div className="textArea" style={this.state.showIcons ? {opacity: 0.5} : null}>
-						<h4>{this.state.text}</h4>
+						<h4 onDoubleClick={this.toEditMode}>{this.state.text}</h4>
 					</div>
 					{this.state.showIcons ? 
-					<div className="iconsArea">
-						<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
-						<i className="material-icons" onClick={this.deleteTask}>delete</i>
-						<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
+					<div className="iconsArea">					
 						<i className="material-icons" onClick={this.moveTask.bind(this, 1)}>keyboard_arrow_up</i>
+						<i className="material-icons" onClick={this.moveTask.bind(this, 0)}>keyboard_arrow_down</i>
+						<i className="material-icons" onClick={this.deleteTask}>delete</i>
+						<i className="material-icons" onClick={this.toEditMode}>mode_edit</i>
 					</div> 
 					: null }
 				</div>		   
@@ -263,7 +262,6 @@ var TaskElement = React.createClass({
 				underlineStyle={{borderColor:Colors.blueGrey300}}
 				underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
 				multiLine={true}
-				errorStyle={{color:Colors.blueGrey500}}
 				onEnterKeyDown={this.editTask}
 				/>
 				<br/>
