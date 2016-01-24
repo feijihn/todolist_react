@@ -15,6 +15,7 @@ var IconButton = require('material-ui/lib/icon-button');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 var Divider = require('material-ui/lib/divider');
 var IconMenu = require('material-ui/lib/menus/icon-menu');
+var DropDownMenu = require('material-ui/lib/DropDownMenu');
 
 var circleButtonStyle = {
 	height: 50,
@@ -236,10 +237,12 @@ var TaskElement = React.createClass({
 			underlineStyle={{borderColor:Colors.blueGrey300}}
 			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
 			multiLine={true}
-			errorText="Press Enter to submit your task"
 			errorStyle={{color:Colors.blueGrey300}}
-			onEnterKeyDown={this.editTask}
-			/>
+			errorText={"Press Enter to submit your task"}
+			onEnterKeyDown={this.editTask}/>
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
 			</div>
 		);
 		}
