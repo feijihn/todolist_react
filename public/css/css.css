@@ -34,8 +34,7 @@ body{
     width: 100%;
     display: inline-block;
 	vertical-align: top;
-		word-break: break-all;
-		word-wrap: break-word;
+    word-break: break-all; /*a little crutch here. should be discussed later. made it to force word wrapping*/
 }
 
 .paperE {
@@ -66,5 +65,4 @@ body{
 
 .textArea {
     float:left;
-		text-align: left;
 }

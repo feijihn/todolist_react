@@ -79,7 +79,7 @@ var TaskBox = React.createClass({
 			url: this.props.url, 
 			dataType: 'json',
 			type: 'POST',
-			data: {"method": "append", "status": "1", "text": "New task"},
+			data: {"method": "append", "status": "0", "text": "New task"},
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),
@@ -261,17 +261,18 @@ var TaskElement = React.createClass({
 				<TextField 
 				onChange={this.textChange}
 				defaultValue={this.state.text}
-				underlineStyle={{borderColor:Colors.blueGrey600}}
-				underlineFocusStyle={{borderColor:Colors.red100}} 
+				underlineStyle={{borderColor:Colors.blueGrey300}}
+				underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
 				multiLine={true}
 				errorStyle={{color:Colors.blueGrey500}}
-				errorText={"Press \"Enter\" to submit your task"}
 				onEnterKeyDown={this.editTask}
 				/>
+				<br/>
 				<br/>
 				<RaisedButton label="brown" backgroundColor={Colors.brown100} onClick={this.updateStatus.bind(this, "1")}/>
 				<RaisedButton label="blue" backgroundColor={Colors.indigo100} onClick={this.updateStatus.bind(this, "2")}/>
 				<RaisedButton label="purple" backgroundColor={Colors.deepPurple100} onClick={this.updateStatus.bind(this, "3")}/>
+				<RaisedButton label="Done" backgroundColor={Colors.blueGrey600} primary={true} onClick={this.editTask}/>
 				</div>
 			);
 			}
