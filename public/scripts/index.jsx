@@ -90,12 +90,12 @@ var TaskBox = React.createClass({
 			}.bind(this)
 		});
 	},
-	handleEdit: function(key, newText){
+	handleEdit: function(key, newText, newStatus){
 		$.ajax({																																	
 			url: this.props.url, 
 			dataType: 'json',
 			type: 'POST',
-			data: {"method": "edit", "key": key, "text": newText},
+			data: {"method": "edit", "key": key, "text": newText, "status": newStatus},
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),
@@ -174,6 +174,9 @@ var TaskElement = React.createClass({
 			status: this.props.status,
 			editing: this.props.editing
 		});
+		this.updateStatus();
+	},
+	updateStatus: function() {
 		switch(this.props.status){
 			case "1":
 				this.setState({
@@ -188,13 +191,16 @@ var TaskElement = React.createClass({
 						backgroundColor: Colors.indigo100
 					}			
 				})
+				break;
 			case "3":
 				this.setState({
 					style: {
-						backgroundColor: Colors.deepPurple100
+						backgroundColor: Colors.deepPurple300
 					}			
 				})
+				break;
 		};
+
 	},
 	deleteTask: function() {
 		this.props.onDelete(this.state.id);
@@ -205,11 +211,22 @@ var TaskElement = React.createClass({
 		});
 	},
 	editTask: function(e) {
-		this.props.onEdit(this.state.id, e.target.value);
 		this.setState({
 			editing: false,
-			text: e.target.value
 		});
+		this.props.onEdit(this.state.id, this.state.text, this.state.status);
+	},
+	textChange: function(e) {
+		this.setState({
+			text: e.target.value
+		})
+	},
+	setStatus: function(status) {
+		this.setState({
+			status: status
+		})
+		this.props.onEdit(this.state.id, this.state.text, this.state.status);
+		this.updateStatus()
 	},
 	moveTask: function(direction){
 		this.props.onMove(this.state.id, direction) //1 means move UP and 0 means move DOWN
@@ -231,8 +248,9 @@ var TaskElement = React.createClass({
 			);
 		}else{ /*think about adding fullWidth={true} property*/
 		return (
-			<div className="taskElement">
+			<div className="taskElement" style={this.state.style}>
 			<TextField 
+			onChange={this.textChange}
 			defaultValue={this.state.text}
 			underlineStyle={{borderColor:Colors.blueGrey300}}
 			underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
@@ -240,9 +258,9 @@ var TaskElement = React.createClass({
 			errorStyle={{color:Colors.blueGrey300}}
 			errorText={"Press Enter to submit your task"}
 			onEnterKeyDown={this.editTask}/>
-			<p>1</p>
-			<p>2</p>
-			<p>3</p>
+			<p onClick={this.setStatus.bind(this, "1")}>1</p>
+			<p onClick={this.setStatus.bind(this, "2")}>2</p>
+			<p onClick={this.setStatus.bind(this, "3")}>3</p>
 			</div>
 		);
 		}

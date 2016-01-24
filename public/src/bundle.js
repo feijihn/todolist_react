@@ -127,7 +127,7 @@
 				url: this.props.url, 
 				dataType: 'json',
 				type: 'POST',
-				data: {"method": "append", "status": 1, "text": "Empty task."},
+				data: {"method": "append", "status": 1, "text": "New task"},
 				success: function(data) {
 					this.setState({data: data});
 				}.bind(this),
@@ -136,12 +136,12 @@
 				}.bind(this)
 			});
 		},
-		handleEdit: function(key, newText){
+		handleEdit: function(key, newText, newStatus){
 			$.ajax({																																	
 				url: this.props.url, 
 				dataType: 'json',
 				type: 'POST',
-				data: {"method": "edit", "key": key, "text": newText},
+				data: {"method": "edit", "key": key, "text": newText, "status": newStatus},
 				success: function(data) {
 					this.setState({data: data});
 				}.bind(this),
@@ -193,7 +193,7 @@
 		render: function() {
 			var taskNodes = this.props.data.map(function(task) {
 				return (
-					React.createElement(TaskElement, {key: task.id, id: task.id, status: task.status, text: task.text, onEdit: this.props.onEdit, onDelete: this.props.onDelete, onMove: this.props.onMove})
+					React.createElement(TaskElement, {key: task.id, id: task.id, status: task.status, text: task.text, editing: task.editing, onEdit: this.props.onEdit, onDelete: this.props.onDelete, onMove: this.props.onMove})
 				);
 			}, this);
 			return (
@@ -218,7 +218,11 @@
 				text: this.props.text,
 				id: this.props.id,
 				status: this.props.status,
+				editing: this.props.editing
 			});
+			this.updateStatus();
+		},
+		updateStatus: function() {
 			switch(this.props.status){
 				case "1":
 					this.setState({
@@ -233,13 +237,16 @@
 							backgroundColor: Colors.indigo100
 						}			
 					})
+					break;
 				case "3":
 					this.setState({
 						style: {
-							backgroundColor: Colors.deepPurple100
+							backgroundColor: Colors.deepPurple300
 						}			
 					})
+					break;
 			};
+
 		},
 		deleteTask: function() {
 			this.props.onDelete(this.state.id);
@@ -250,11 +257,22 @@
 			});
 		},
 		editTask: function(e) {
-			this.props.onEdit(this.state.id, e.target.value);
 			this.setState({
 				editing: false,
-				text: e.target.value
 			});
+			this.props.onEdit(this.state.id, this.state.text, this.state.status);
+		},
+		textChange: function(e) {
+			this.setState({
+				text: e.target.value
+			})
+		},
+		setStatus: function(status) {
+			this.setState({
+				status: status
+			})
+			this.props.onEdit(this.state.id, this.state.text, this.state.status);
+			this.updateStatus()
 		},
 		moveTask: function(direction){
 			this.props.onMove(this.state.id, direction) //1 means move UP and 0 means move DOWN
@@ -276,8 +294,9 @@
 				);
 			}else{ /*think about adding fullWidth={true} property*/
 			return (
-				React.createElement("div", {className: "taskElement"}, 
+				React.createElement("div", {className: "taskElement", style: this.state.style}, 
 				React.createElement(TextField, {
+				onChange: this.textChange, 
 				defaultValue: this.state.text, 
 				underlineStyle: {borderColor:Colors.blueGrey300}, 
 				underlineFocusStyle: {borderColor:Colors.blueGrey600}, 
@@ -285,9 +304,9 @@
 				errorStyle: {color:Colors.blueGrey300}, 
 				errorText: "Press Enter to submit your task", 
 				onEnterKeyDown: this.editTask}), 
-				React.createElement("p", null, "1"), 
-				React.createElement("p", null, "2"), 
-				React.createElement("p", null, "3")
+				React.createElement("p", {onClick: this.setStatus.bind(this, "1")}, "1"), 
+				React.createElement("p", {onClick: this.setStatus.bind(this, "2")}, "2"), 
+				React.createElement("p", {onClick: this.setStatus.bind(this, "3")}, "3")
 				)
 			);
 			}

@@ -57,6 +57,7 @@ app.post('/api/tasks', function(req, res) {
 			case 'edit':
 				findById(tasks, req.body.key, function(idToEdit){
 					tasks[idToEdit].text = req.body.text;	
+					tasks[idToEdit].status = req.body.status;
 				});
 				break;
 			case 'move':
