@@ -161,7 +161,7 @@ var TaskElement = React.createClass({
 		return {
 			text : "",
 			id : 0,
-			status: {},
+			status: '1', 
 			editing: false,
 			showIcons: false
 		}
