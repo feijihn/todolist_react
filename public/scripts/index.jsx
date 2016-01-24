@@ -2,6 +2,7 @@ var React = require('react');
 var ajax = require('ajax');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
+var {render} = require('react-dom');
 var Paper = require('material-ui/lib/paper');
 var Colors = require('material-ui/lib/styles/colors');
 var AppBar = require('material-ui/lib/app-bar');
@@ -240,7 +241,7 @@ var TaskElement = React.createClass({
 				<div className="taskElement" style={this.state.style}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
-					<div className="textArea" style={this.state.showIcons ? {opacity: 0.5} : null}>
+					<div className="textArea" style={this.state.showIcons ? {opacity: 1} : null}>
 						<h4 onDoubleClick={this.toEditMode}>{this.state.text}</h4>
 					</div>
 					{this.state.showIcons ? 
@@ -262,6 +263,7 @@ var TaskElement = React.createClass({
 				underlineStyle={{borderColor:Colors.blueGrey300}}
 				underlineFocusStyle={{borderColor:Colors.blueGrey600}} 
 				multiLine={true}
+				fullWidth={true}
 				onEnterKeyDown={this.editTask}
 				/>
 				<br/>

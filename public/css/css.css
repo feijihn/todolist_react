@@ -9,11 +9,6 @@ body{
     text-align: center;
 }
 
-#statusBar {
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-    text-align: center;
-}
-
 .taskBox {
     border: 1px solid rgba(0,0,0,0.1);
     width: 100%;
@@ -25,17 +20,19 @@ body{
 
 .addNewTask {
     width: 100%;
-    padding: 3.5%;
+    padding: 3%;
 }
 
 .taskElement {
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding: 2%;
     width: 100%;
+    padding: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
     display: inline-block;
 	vertical-align: top;
-		word-wrap: break-word;
-    word-break: break-all; /*a little crutch here. should be discussed later. made it to force word wrapping*/
+	word-wrap: break-word;
+    word-break: break-all; /*a little "crutch" here. should be discussed later. made it to force word wrapping*/
 }
 
 .paperE {
@@ -54,10 +51,13 @@ body{
 .iconsArea {
     float:right;
     position: absolute;
-    right: 5%;
+    right: 3%;
     background-color: #546e7a;
-    border-radius: 3px;
+    opacity: 0.9;
     padding: 5px;
+    margin-top: -1.96%;
+    height: 57.5667px; /*should get parent's height but i dunno how */
+    line-height: 57.5667px; /*same here*/
 }
 
 .iconsArea i {
@@ -66,5 +66,5 @@ body{
 
 .textArea {
     float:left;
-		text-align: left;
+	text-align: left;
 }
