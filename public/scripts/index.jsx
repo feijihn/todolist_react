@@ -79,7 +79,7 @@ var TaskBox = React.createClass({
 			url: this.props.url, 
 			dataType: 'json',
 			type: 'POST',
-			data: {"method": "append", "status": "0", "text": "New task"},
+			data: {"method": "append", "status": "1", "text": "New task"},
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),
