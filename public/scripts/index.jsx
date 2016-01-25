@@ -2,7 +2,6 @@ var React = require('react');
 var ajax = require('ajax');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
-var {render} = require('react-dom');
 var Paper = require('material-ui/lib/paper');
 var Colors = require('material-ui/lib/styles/colors');
 var AppBar = require('material-ui/lib/app-bar');
@@ -208,14 +207,16 @@ var TaskElement = React.createClass({
 	},
 	toEditMode: function() {
 		this.setState({
-			editing: true
+			editing: true,
+			showIcons: false
 		});
 	},
 	editTask: function() {
 		this.setState({
 			editing: false,
+			showIcons: false
 		});
-		this.props.onEdit(this.state.id, this.state.text, this.state.status);
+			this.props.onEdit(this.state.id, this.state.text, this.state.status);
 	},
 	textChange: function(e) {
 		this.setState({
@@ -240,6 +241,7 @@ var TaskElement = React.createClass({
 			return (
 				<div className="taskElement" style={this.state.style}
 				onMouseEnter={this.handleMouseEnter}
+				onMouseOver={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
 					<div className="textArea" style={this.state.showIcons ? {opacity: 1} : null}>
 						<h4 onDoubleClick={this.toEditMode}>{this.state.text}</h4>
@@ -271,7 +273,7 @@ var TaskElement = React.createClass({
 				<RaisedButton label="brown" backgroundColor={Colors.brown100} onClick={this.updateStatus.bind(this, "1")}/>
 				<RaisedButton label="blue" backgroundColor={Colors.indigo100} onClick={this.updateStatus.bind(this, "2")}/>
 				<RaisedButton label="purple" backgroundColor={Colors.deepPurple100} onClick={this.updateStatus.bind(this, "3")}/>
-				<RaisedButton label="Done" backgroundColor={Colors.blueGrey600} primary={true} onClick={this.editTask}/>
+				<RaisedButton label="Done" backgroundColor={Colors.blueGrey600} primary={true} onClick={this.editTask} />
 				</div>
 			);
 			}
@@ -300,7 +302,6 @@ var TaskElement = React.createClass({
 				onClick={this.props.onAdd}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
-
 				<i className="material-icons" >add</i>
 				</Paper>
 				</div>
